@@ -5,6 +5,7 @@ import ReactStars from "react-rating-stars-component";
 
 
 
+
 export default function Home() {
   return (
     <div className="Nunito text-md ">
@@ -70,11 +71,76 @@ export default function Home() {
         <span className="Nunito text-xl m-2 py-4">
           Inspire foodies, get likes, and start a buzz around your culinary creations. From family treasures to bold experiments, every dish deserves a spotlight. Join the fun, share your flavor, and let’s turn your kitchen magic into community love!"
         </span>
-        <button className="px-6 py-2 rounded-md bg-[#b55d51] font-bold text-white m-4 w-[150px]">
+        <button className="px-6 py-4 rounded-md bg-[#b55d51] font-bold text-white m-4 ">
           Create New Recipe
         </button>
         </div>
         
+      </div>
+
+
+      {/* {} */}
+      <div className="absolute top-[200%] left-[10%]">
+        <h1 className="text-2xl font-bold py-4"> Trending Now</h1>
+        
+        <div className="w-[250px] py-4 shadow-xl shadow-gray-300 flex flex-col justify-evenly items-center relative ">
+          <img src="./ramen.jpeg" alt="" className="  w-[200px] h-[200px] mt-4" />
+          
+          <ReactStars
+            count={5}
+            value={4.5}
+            edit={false}
+            size={24}
+            isHalf={true}
+            emptyIcon={<i className="far fa-star"></i>}
+            halfIcon={<i className="fa fa-star-half-alt"></i>}
+            fullIcon={<i className="fa fa-star"></i>}
+            activeColor="#ffd700"
+          />
+          <p>Korean Instant Ramen <br />
+           Kimchi Flavour</p>
+        </div>
+      </div>
+
+
+      {/* {} */}
+      <div className="absolute top-[300%] left-[10%]">
+        <h1 className="text-2xl font-bold py-4">Explore Recipes</h1>
+        
+        <div className="w-[250px] py-4 shadow-xl shadow-gray-300 flex flex-col justify-evenly items-center relative ">
+          <img src="./ramen.jpeg" alt="" className="  w-[200px] h-[200px] mt-4" />
+          
+          <ReactStars
+            count={5}
+            value={4.5}
+            edit={false}
+            size={24}
+            isHalf={true}
+            emptyIcon={<i className="far fa-star"></i>}
+            halfIcon={<i className="fa fa-star-half-alt"></i>}
+            fullIcon={<i className="fa fa-star"></i>}
+            activeColor="#ffd700"
+          />
+          <p>Korean Instant Ramen <br />
+           Kimchi Flavour</p>
+        </div>
+      </div>
+
+
+      {/*  */}
+      <div className="flex flex-col absolute top-[400%] justify-evenly items-center bg-[#fff0ed] w-full py-8">
+        <p className="Meri text-[#b55d51] text-2xl font-bold py-2 ">Let's stay in touch</p><br />
+        <p className="w-[600px]">Join our newsletter so that we can reach out to you with our new recipes and connect to our community!</p>
+        <span className="flex m-4 ">
+          <input type="email" placeholder="Enter your Email" className="border border-[#b55d51] text-[#b55d51] focus-within:outline-none w-[500px] rounded-md " />
+          <button type="submit" className=" rounded-md bg-[#b55d51] font-bold text-white p-4 mx-4 w-[200px]">Subscribe</button>
+        </span>
+      </div>
+
+      {/*  cstegories*/}
+
+      <div className="absolute top-[500%] left-[10%]"> 
+        <img src="./break.jpeg" alt="" />
       </div>
     </div>
   );
