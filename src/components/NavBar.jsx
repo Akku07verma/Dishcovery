@@ -21,10 +21,10 @@ export default function NavBar() {
     </ul>
     <ul className="flex w-[25%] justify-evenly items-center">
       <li>
-        <button className=' w-[150px] bg-white text-black py-2  font-bold rounded-xl'>Log in</button>
+        <button className=' w-[150px] bg-white text-black py-2  font-bold rounded-md'>Log in</button>
       </li>
       <li>
-        <button className=' w-[150px] bg-[#B76156] text-white font-bold py-2 rounded-xl'>Sign up</button>
+        <button className=' w-[150px] bg-[#B76156] text-white font-bold py-2 rounded-md'>Sign up</button>
       </li>
     </ul>
   </nav>
