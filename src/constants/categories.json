@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Breakfast Recipes",
+        "img": "./break.jpeg"
+    },
+    {
+        "name": "Lunch Recipes",
+        "img": "./lunch.jpeg"
+    },
+    {
+        "name":"Dinner Recipes",
+        "img":"./dinner.jpeg"
+    },
+    {
+        "name":"Appetizers",
+        "img":"appetizer.jpeg"
+    },
+    {
+        "name":"Salad Recipes",
+        "img":"./salad.jpeg"
+    },
+    {
+        "name":"Pizza Recipes",
+        "img":"./pizza.jpeg"
+    },
+    {
+        "name":"Snacks Recipes",
+        "img":"./Samosa.jpeg"
+    },
+    {
+        "name":"Drinks Recipes",
+        "img":"./drinks.jpeg"
+    }
+]

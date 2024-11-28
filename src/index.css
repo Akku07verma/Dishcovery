@@ -20,3 +20,119 @@ html{
 .Nunito{
     font-family: "Nunito";
 }
+
+.animationHeading{
+    animation: slideInFromLeft 1s ease-in-out;
+}
+
+.animationParagraph{
+    opacity: 0;
+    animation: slideInFromLeft 1s ease-in-out 0.5s forwards;
+}
+
+.animationbtn{
+    opacity: 0;
+    animation: slideInFromLeft 1s ease-in-out 1s forwards;
+}
+
+.animationDish{
+  opacity: 0;
+  animation:slideInFromRight 1s ease-in-out 0.5s forwards;
+}
+
+.animationCmt{
+    opacity: 0;
+    animation: slideInFromRightCmt 1s ease-in-out 1s forwards;
+}
+
+.animationNav{
+    opacity: 0;
+    animation: slideFromTop 1s ease-in-out 1.5s forwards;
+}
+
+.animationDiv{
+    opacity: 0;
+    animation: slideFromBottom 1s ease-in-out forwards;
+}
+
+.animationTrend{
+    opacity: 0;
+    animation: slideTrend 1s ease-in-out forwards;
+}
+
+
+@keyframes slideInFromLeft {
+    from{
+        transform: translateX(-300px);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+} 
+
+
+@keyframes slideInFromRight {
+    from{
+     transform: translateX(110px);
+     opacity: 0;
+    }
+    to{
+     transform: translateX(0);
+     opacity: 1;
+    }
+}
+@keyframes slideInFromRightCmt {
+    from{
+     transform: translateX(400px);
+     opacity: 0;
+    }
+    to{
+     transform: translateX(0);
+     opacity: 1;
+    }
+}
+
+@keyframes slideFromTop {
+    from{
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromBottom {
+    from{
+        transform: translateY(1200px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(900px);
+        opacity: 1;
+    }
+}
+
+@keyframes slideTrend {
+    from{
+        transform: translateY(1600px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(1100px);
+        opacity: 1;
+    }
+}
+@keyframes slideTrend {
+    from{
+        transform: translateY(1600px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(1100px);
+        opacity: 1;
+    }
+}

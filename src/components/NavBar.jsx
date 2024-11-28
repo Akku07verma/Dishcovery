@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function NavBar() {
   return (
-    <nav className="flex w-full py-6">
+    <nav className="flex w-full py-6 animationNav">
       <ul className="flex justify-evenly items-center w-[25%]">
       <li className='flex'>
         
@@ -11,7 +11,6 @@ export default function NavBar() {
       </li>
       </ul>
     <ul className="flex justify-evenly items-center w-[50%]">
-  
       <li>Home</li>
       <li>Recipe</li>
       <li>Add Recipe</li>
