@@ -1,6 +1,9 @@
 import React from 'react'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
+import { FaRegUserCircle } from 'react-icons/fa'
+import { MdOutlineMail } from 'react-icons/md'
+import { RiLockPasswordLine } from 'react-icons/ri'
 
 export default function Login() {
   return (
@@ -10,19 +13,51 @@ export default function Login() {
         <div className='w-[40%]'>
            <img src="./login.jpeg" alt=""  className='w-full object-cover h-[65vh]'/>
         </div>
-        <div className='flex flex-col w-[50%]   ' >  
-            <p className='text-3xl font-bold py-4'>Want to join our Family</p>
-            <span className=' flex flex-col '>
-            <input type="text"  placeholder='Enter your Username' className='p-2 w-full border-0 outline outline-1 outline-bottom-0 focus-within:outline-1 outline-gray-300 border-b-4 border-gray-300 focus-within:border-[#B76156] rounded-t-lg' />
-            <input type="email"  placeholder='Enter your Email' className='p-2 w-full border-0 outline outline-1 outline-bottom-0 focus-within:outline-1 outline-gray-300 border-b-4 border-gray-300 focus-within:border-[#B76156]' />
-            <input type="password"  placeholder='Enter your Password' className='p-2 w-full border-0 outline outline-1 outline-bottom-0 focus-within:outline-1 outline-gray-300 border-b-4 border-gray-300 focus-within:border-[#B76156] rounded-b-lg' />
-            <input type="password"  placeholder='Enter your Confirm Password' className='p-2 w-full border-0 outline outline-1 outline-bottom-0 focus-within:outline-1 outline-gray-300 border-b-4 border-gray-300 focus-within:border-[#B76156] rounded-b-lg' />
+        <div className="flex flex-col w-[50%]   ">
+          <p className="text-3xl font-bold py-4">Want to join our Family</p>
+          <span className=" flex flex-col ">
+            <div className="relative">
+              <FaRegUserCircle color="gray" className="absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                placeholder=" Enter your Username"
+                className="p-2 pl-10 w-full border-0 outline outline-1 outline-bottom-0 focus-within:outline-1 outline-gray-300 border-b-4 border-gray-300 focus-within:border-[#B76156] rounded-t-lg"
+              />
+            </div>
+
+            <div className="relative">
+              <MdOutlineMail color="gray" className="absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="email"
+                placeholder="Enter your Email"
+                className="p-2  pl-10 w-full border-0 outline outline-1 outline-bottom-0 focus-within:outline-1 outline-gray-300 border-b-4 border-gray-300 focus-within:border-[#B76156]"
+              />
+            </div>
+
+            <div className="relative">
+              <RiLockPasswordLine color="gray" className="absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="password"
+                placeholder="Enter your Password"
+                className="p-2 w-full pl-10 border-0 outline outline-1 outline-bottom-0 focus-within:outline-1 outline-gray-300 border-b-4 border-gray-300 focus-within:border-[#B76156] "
+              />
+            </div>
+            <div className="relative">
+              <RiLockPasswordLine color="gray" className="absolute left-3 top-1/2 -translate-y-1/2" />
+              <input
+                type="password"
+                placeholder="Enter your Confirm Password"
+                className="p-2 w-full pl-10 border-0 outline outline-1 outline-bottom-0 focus-within:outline-1 outline-gray-500 border-b-4 border-gray-300 focus-within:border-[#B76156] rounded-b-lg"
+              />
+            </div>
+            <span className='text-gray-500 text-sm my-4 font-bold'>
+              <input type="checkbox" name="" id="check" className='check' />{"   "}I agree the <span className='underline'>term and policies</span>
             </span>
-           
+          </span>
             <button className="px-6 py-2 rounded-md bg-[#b55d51] font-bold text-white m-4 ">
           Sign Up
         </button>
-        <span>Already have an account? <a href="" className='text-[#b55d51] text-2xl  '>Login</a></span>
+        <span>Already have an account? <a href="/login" className='text-[#b55d51] text-lg underline  '>Login</a></span>
         <ul className="flex justify-end items-center w-[30%] absolute bottom-[5%] right-[2%]">
         <li className='flex'>
         

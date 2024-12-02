@@ -10,6 +10,11 @@
     padding: 0;
 }
 
+.check{
+    accent-color:#b55d51;
+}
+
+
 html{
     scroll-behavior: smooth;
 }
