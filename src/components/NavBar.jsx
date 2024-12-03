@@ -16,7 +16,7 @@ const navigate = useNavigate();
     <ul className="flex justify-evenly items-center w-[50%] cursor-pointer">
       <li>Home</li>
       <li>Recipe</li>
-      <li>Add Recipe</li>
+      <li onClick={()=>navigate("/addrecipe")}>Add Recipe</li>
       <li>Notification</li>
       <li>Profile</li>
       <li>About us</li>
