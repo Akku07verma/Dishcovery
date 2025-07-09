@@ -111,7 +111,7 @@ export default function HomeImproved() {
     <motion.div
       className="m-4 w-[400px] py-4 shadow-xl shadow-gray-300 flex flex-col justify-evenly items-center relative rounded-lg bg-white hover:shadow-2xl"
       variants={cardVariants}
-      initial="hidden"
+      
       animate="visible"
       transition={{ delay: index * 0.1 }}
       whileHover={{ y: -5, scale: 1.02 }}
@@ -181,7 +181,7 @@ export default function HomeImproved() {
             <motion.div
               className="grid grid-cols-2 space-x-8 w-[80%] m-auto items-center"
               variants={heroVariants}
-              initial="hidden"
+              
               animate="visible"
             >
               {/* Left Side - Text Content */}
@@ -220,7 +220,7 @@ export default function HomeImproved() {
                   className="z-10"
                   alt=""
                   variants={imageVariants}
-                  initial="hidden"
+                  
                   animate="visible"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ duration: 0.3 }}
@@ -267,7 +267,7 @@ export default function HomeImproved() {
             ref={shareRef}
             className="flex w-[90%] m-auto justify-evenly items-center py-20"
             variants={scrollVariants}
-            initial="hidden"
+            
             animate={shareInView ? "visible" : "hidden"}
           >
             <motion.img
@@ -280,7 +280,7 @@ export default function HomeImproved() {
             <motion.div
               className="flex flex-col w-[600px] justify-center items-center mx-4"
               variants={containerVariants}
-              initial="hidden"
+              
               animate={shareInView ? "visible" : "hidden"}
             >
               <motion.span
@@ -318,13 +318,12 @@ export default function HomeImproved() {
             ref={trendingRef}
             className="block mt-20"
             variants={scrollVariants}
-            initial="hidden"
+            
             animate={trendingInView ? "visible" : "hidden"}
           >
             <motion.h1
               className="text-3xl font-bold py-4 ml-32"
               variants={scrollVariants}
-              initial="hidden"
               animate={trendingInView ? "visible" : "hidden"}
             >
               Trending Now
@@ -332,7 +331,6 @@ export default function HomeImproved() {
             <motion.div
               className="flex w-[90%] m-auto flex-wrap justify-evenly items-center"
               variants={containerVariants}
-              initial="hidden"
               animate={trendingInView ? "visible" : "hidden"}
             >
               {recipes.map((recipe, index) => (
@@ -346,13 +344,13 @@ export default function HomeImproved() {
             ref={exploreRef}
             className="block mt-40"
             variants={scrollVariants}
-            initial="hidden"
+            
             animate={exploreInView ? "visible" : "hidden"}
           >
             <motion.h1
               className="text-3xl font-bold py-4 ml-32"
               variants={scrollVariants}
-              initial="hidden"
+              
               animate={exploreInView ? "visible" : "hidden"}
             >
               Explore Recipe
@@ -360,7 +358,7 @@ export default function HomeImproved() {
             <motion.div
               className="flex w-[90%] m-auto flex-wrap justify-evenly items-center"
               variants={containerVariants}
-              initial="hidden"
+              
               animate={exploreInView ? "visible" : "hidden"}
             >
               {recipes.length > 0 && recipes.map((recipe, index) => (
@@ -374,13 +372,13 @@ export default function HomeImproved() {
             ref={newsletterRef}
             className="flex flex-col mt-[200px] justify-evenly items-center bg-[#fff0ed] w-full py-8"
             variants={scrollVariants}
-            initial="hidden"
+            
             animate={newsletterInView ? "visible" : "hidden"}
           >
             <motion.p
               className="Meri text-[#b55d51] text-4xl font-bold py-2"
               variants={scrollVariants}
-              initial="hidden"
+              
               animate={newsletterInView ? "visible" : "hidden"}
             >
               Let's stay in touch
@@ -389,7 +387,7 @@ export default function HomeImproved() {
             <motion.p
               className="w-[600px] text-center"
               variants={scrollVariants}
-              initial="hidden"
+              
               animate={newsletterInView ? "visible" : "hidden"}
               transition={{ delay: 0.2 }}
             >
@@ -399,7 +397,7 @@ export default function HomeImproved() {
             <motion.span
               className="flex m-4"
               variants={scrollVariants}
-              initial="hidden"
+              
               animate={newsletterInView ? "visible" : "hidden"}
               transition={{ delay: 0.4 }}
             >
@@ -424,13 +422,13 @@ export default function HomeImproved() {
             ref={categoriesRef}
             className="block mb-16"
             variants={scrollVariants}
-            initial="hidden"
+            
             animate={categoriesInView ? "visible" : "hidden"}
           >
             <motion.h1
               className="text-3xl font-bold ml-52 mt-24"
               variants={scrollVariants}
-              initial="hidden"
+              
               animate={categoriesInView ? "visible" : "hidden"}
             >
               Categories
@@ -438,7 +436,7 @@ export default function HomeImproved() {
             <motion.div
               className="flex flex-wrap justify-evenly items-center w-[80%] m-auto"
               variants={containerVariants}
-              initial="hidden"
+              
               animate={categoriesInView ? "visible" : "hidden"}
             >
               {categories.map((item, index) => (
