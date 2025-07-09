@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import NavBar from "../components/NavBar";
 import { FaBookmark } from "react-icons/fa";
 import ReactStars from "react-rating-stars-component";
@@ -6,12 +6,25 @@ import categories from "../constants/categories.json";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import axios from "axios";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
-export default function Home() {
-  const [pos, setPos] = useState(0);
+export default function HomeImproved() {
   const [loader, setLoader] = useState(true);
   const [recipes, setRecipes] = useState([]);
+
+  // Refs for scroll animations
+  const shareRef = useRef(null);
+  const trendingRef = useRef(null);
+  const exploreRef = useRef(null);
+  const newsletterRef = useRef(null);
+  const categoriesRef = useRef(null);
+
+  // useInView hooks
+  const shareInView = useInView(shareRef, { once: true, margin: "-100px" });
+  const trendingInView = useInView(trendingRef, { once: true, margin: "-100px" });
+  const exploreInView = useInView(exploreRef, { once: true, margin: "-100px" });
+  const newsletterInView = useInView(newsletterRef, { once: true, margin: "-100px" });
+  const categoriesInView = useInView(categoriesRef, { once: true, margin: "-100px" });
 
   // Animation variants
   const containerVariants = {
@@ -22,6 +35,18 @@ export default function Home() {
       transition: {
         duration: 0.8,
         staggerChildren: 0.2
+      }
+    }
+  };
+
+  const scrollVariants = {
+    hidden: { opacity: 0, y: 60 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
       }
     }
   };
@@ -81,14 +106,6 @@ export default function Home() {
     getAllRecipes();
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setPos(window.scrollY);
-    };
-    
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const RecipeCard = ({ recipe, index }) => (
     <motion.div
@@ -148,105 +165,110 @@ export default function Home() {
         <div className="Nunito text-md min-h-screen">
           <NavBar />
 
-          {/* Background */}
-          <motion.img
-            src="./bg.svg"
-            className="absolute -z-30 top-0 right-0 w-[60%]"
-            alt=""
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2 }}
-          />
+          {/* Hero Section with Background */}
+          <div className="relative min-h-screen flex items-center">
+            {/* Background */}
+            <motion.img
+              src="./bg.svg"
+              className="absolute -z-30 top-0 right-0 w-[60%]"
+              alt=""
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2 }}
+            />
 
-          {/* Hero Section */}
-          <motion.div
-            className="absolute top-[30%] left-[8%]"
-            variants={heroVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.h1
-              className="Meri text-6xl font-extrabold mb-4"
-              variants={itemVariants}
+            {/* Hero Content */}
+            <motion.div
+              className="grid grid-cols-2 space-x-8 w-[80%] m-auto items-center"
+              variants={heroVariants}
+              initial="hidden"
+              animate="visible"
             >
-              What's in <br /> Your <span className="text-[#B76156]">Pantry</span>?
-            </motion.h1>
-            <motion.p
-              className="w-[400px] flex justify-center m-2"
-              variants={itemVariants}
-            >
-              Unveil the magic within your pantry—enter the ingredients you hold,
-              and let Dishcovery weave them into delightful culinary tales. Share
-              your creations, savor the flavors of a thriving community, and let
-              every like and comment ignite your passion for food. At Dishcovery,
-              every dish begins with a spark of imagination.
-            </motion.p>
-            <motion.button
-              className="px-6 py-2 rounded-md bg-[#b55d51] font-bold text-white m-4 hover:bg-[#9a4a3e] transition-colors"
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Ask Recipe
-            </motion.button>
-          </motion.div>
+              {/* Left Side - Text Content */}
+              <div className="flex-1">
+                <motion.h1
+                  className="text-6xl font-extrabold mb-4"
+                  variants={itemVariants}
+                >
+                  What's in <br /> Your <span className="text-[#B76156]">Pantry</span>?
+                </motion.h1>
+                <motion.p
+                  className="text-lg mb-6"
+                  variants={itemVariants}
+                >
+                  Unveil the magic within your pantry—enter the ingredients you hold,
+                  and let Dishcovery weave them into delightful culinary tales. Share
+                  your creations, savor the flavors of a thriving community, and let
+                  every like and comment ignite your passion for food. At Dishcovery,
+                  every dish begins with a spark of imagination.
+                </motion.p>
+                <motion.button
+                  className="px-6 py-2 rounded-md bg-[#b55d51] font-bold text-white hover:bg-[#9a4a3e] transition-colors"
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Ask Recipe
+                </motion.button>
+              </div>
 
-          {/* Dish Image */}
-          <motion.img
-            src="./dish.png"
-            width={400}
-            className="absolute -z-20 top-[35%] right-[14%]"
-            alt=""
-            variants={imageVariants}
-            initial="hidden"
-            animate="visible"
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            transition={{ duration: 0.3 }}
-          />
-
-          {/* Comment Section */}
-          <motion.div
-            className="absolute -z-10 top-[68%] right-[35%] bg-white rounded-lg"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            <div className="w-[80px] h-[80px] flex justify-center items-center rounded-full shadow-inner ml-2 mb-[-55px]">
-              <img
-                src="./aditi.png"
-                alt=""
-                className="w-[60px] h-[60px] rounded-full"
-              />
-            </div>
-            <div className="w-[350px] shadow-xl p-4 flex flex-col justify-center items-center rounded-xl">
-              <h1>Aditi Shahi</h1>
-              <ReactStars
-                count={5}
-                value={4.5}
-                edit={false}
-                size={24}
-                isHalf={true}
-                emptyIcon={<i className="far fa-star"></i>}
-                halfIcon={<i className="fa fa-star-half-alt"></i>}
-                fullIcon={<i className="fa fa-star"></i>}
-                activeColor="#ffd700"
-              />
-              <span>
-                Wow, this recipe is a flavour explosion in my mouth! very delicious.
-              </span>
-            </div>
-          </motion.div>
+              {/* Right Side - Dish Image */}
+              <div className="flex-1 flex justify-center items-center relative">
+                <motion.img
+                  src="./dish.png"
+                  width={400}
+                  className="z-10"
+                  alt=""
+                  variants={imageVariants}
+                  initial="hidden"
+                  animate="visible"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ duration: 0.3 }}
+                />
+                
+                {/* Comment Section */}
+                <motion.div
+                  className="absolute -bottom-20 -right-10 bg-white rounded-lg z-20"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: 0.5 }}
+                >
+                  <div className="w-[80px] h-[80px] flex justify-center items-center rounded-full shadow-inner ml-2 mb-[-55px]">
+                    <img
+                      src="./aditi.png"
+                      alt=""
+                      className="w-[60px] h-[60px] rounded-full"
+                    />
+                  </div>
+                  <div className="w-[350px] shadow-xl p-4 flex flex-col justify-center items-center rounded-xl">
+                    <h1>Aditi Shahi</h1>
+                    <ReactStars
+                      count={5}
+                      value={4.5}
+                      edit={false}
+                      size={24}
+                      isHalf={true}
+                      emptyIcon={<i className="far fa-star"></i>}
+                      halfIcon={<i className="fa fa-star-half-alt"></i>}
+                      fullIcon={<i className="fa fa-star"></i>}
+                      activeColor="#ffd700"
+                    />
+                    <span>
+                      Wow, this recipe is a flavour explosion in my mouth! very delicious.
+                    </span>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
 
           {/* Share Section */}
           <motion.div
-            className={
-              pos > 230
-                ? "flex w-[90%] m-auto justify-evenly items-center opacity-100"
-                : "flex w-[90%] m-auto justify-evenly items-center opacity-0"
-            }
-            initial={{ opacity: 0, y: 50 }}
-            animate={pos > 230 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8 }}
+            ref={shareRef}
+            className="flex w-[90%] m-auto justify-evenly items-center py-20"
+            variants={scrollVariants}
+            initial="hidden"
+            animate={shareInView ? "visible" : "hidden"}
           >
             <motion.img
               src="./share.jpeg"
@@ -259,7 +281,7 @@ export default function Home() {
               className="flex flex-col w-[600px] justify-center items-center mx-4"
               variants={containerVariants}
               initial="hidden"
-              animate={pos > 230 ? "visible" : "hidden"}
+              animate={shareInView ? "visible" : "hidden"}
             >
               <motion.span
                 className="Meri text-2xl font-bold py-2 flex flex-col"
@@ -293,16 +315,17 @@ export default function Home() {
 
           {/* Trending Section */}
           <motion.div
-            className={pos > 1000 ? "block" : "hidden"}
-            initial={{ opacity: 0, y: 50 }}
-            animate={pos > 1000 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8 }}
+            ref={trendingRef}
+            className="block mt-20"
+            variants={scrollVariants}
+            initial="hidden"
+            animate={trendingInView ? "visible" : "hidden"}
           >
             <motion.h1
               className="text-3xl font-bold py-4 ml-32"
-              initial={{ opacity: 0, x: -50 }}
-              animate={pos > 1000 ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-              transition={{ duration: 0.6 }}
+              variants={scrollVariants}
+              initial="hidden"
+              animate={trendingInView ? "visible" : "hidden"}
             >
               Trending Now
             </motion.h1>
@@ -310,7 +333,7 @@ export default function Home() {
               className="flex w-[90%] m-auto flex-wrap justify-evenly items-center"
               variants={containerVariants}
               initial="hidden"
-              animate={pos > 1000 ? "visible" : "hidden"}
+              animate={trendingInView ? "visible" : "hidden"}
             >
               {recipes.map((recipe, index) => (
                 <RecipeCard key={index} recipe={recipe} index={index} />
@@ -320,16 +343,17 @@ export default function Home() {
 
           {/* Explore Recipe Section */}
           <motion.div
-            className={pos > 2000 ? "block mt-40" : "hidden mt-40"}
-            initial={{ opacity: 0, y: 50 }}
-            animate={pos > 2000 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8 }}
+            ref={exploreRef}
+            className="block mt-40"
+            variants={scrollVariants}
+            initial="hidden"
+            animate={exploreInView ? "visible" : "hidden"}
           >
             <motion.h1
               className="text-3xl font-bold py-4 ml-32"
-              initial={{ opacity: 0, x: -50 }}
-              animate={pos > 2000 ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-              transition={{ duration: 0.6 }}
+              variants={scrollVariants}
+              initial="hidden"
+              animate={exploreInView ? "visible" : "hidden"}
             >
               Explore Recipe
             </motion.h1>
@@ -337,7 +361,7 @@ export default function Home() {
               className="flex w-[90%] m-auto flex-wrap justify-evenly items-center"
               variants={containerVariants}
               initial="hidden"
-              animate={pos > 2000 ? "visible" : "hidden"}
+              animate={exploreInView ? "visible" : "hidden"}
             >
               {recipes.length > 0 && recipes.map((recipe, index) => (
                 <RecipeCard key={`explore-${index}`} recipe={recipe} index={index} />
@@ -347,38 +371,37 @@ export default function Home() {
 
           {/* Newsletter Section */}
           <motion.div
-            className={
-              pos > 2800
-                ? "flex flex-col mt-[1250px] justify-evenly items-center bg-[#fff0ed] w-full py-8"
-                : "flex flex-col hidden justify-evenly items-center bg-[#fff0ed] w-full py-8"
-            }
-            initial={{ opacity: 0, y: 50 }}
-            animate={pos > 2800 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8 }}
+            ref={newsletterRef}
+            className="flex flex-col mt-[200px] justify-evenly items-center bg-[#fff0ed] w-full py-8"
+            variants={scrollVariants}
+            initial="hidden"
+            animate={newsletterInView ? "visible" : "hidden"}
           >
             <motion.p
               className="Meri text-[#b55d51] text-4xl font-bold py-2"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={pos > 2800 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.6 }}
+              variants={scrollVariants}
+              initial="hidden"
+              animate={newsletterInView ? "visible" : "hidden"}
             >
               Let's stay in touch
             </motion.p>
             <br />
             <motion.p
               className="w-[600px] text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={pos > 2800 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              variants={scrollVariants}
+              initial="hidden"
+              animate={newsletterInView ? "visible" : "hidden"}
+              transition={{ delay: 0.2 }}
             >
               Join our newsletter so that we can reach out to you with our new
               recipes and connect to our community!
             </motion.p>
             <motion.span
               className="flex m-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={pos > 2800 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              variants={scrollVariants}
+              initial="hidden"
+              animate={newsletterInView ? "visible" : "hidden"}
+              transition={{ delay: 0.4 }}
             >
               <input
                 type="email"
@@ -398,16 +421,17 @@ export default function Home() {
 
           {/* Categories Section */}
           <motion.div
-            className={pos > 3300 ? "block mb-16" : "hidden"}
-            initial={{ opacity: 0, y: 50 }}
-            animate={pos > 3300 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8 }}
+            ref={categoriesRef}
+            className="block mb-16"
+            variants={scrollVariants}
+            initial="hidden"
+            animate={categoriesInView ? "visible" : "hidden"}
           >
             <motion.h1
               className="text-3xl font-bold ml-52 mt-24"
-              initial={{ opacity: 0, x: -50 }}
-              animate={pos > 3300 ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
-              transition={{ duration: 0.6 }}
+              variants={scrollVariants}
+              initial="hidden"
+              animate={categoriesInView ? "visible" : "hidden"}
             >
               Categories
             </motion.h1>
@@ -415,7 +439,7 @@ export default function Home() {
               className="flex flex-wrap justify-evenly items-center w-[80%] m-auto"
               variants={containerVariants}
               initial="hidden"
-              animate={pos > 3300 ? "visible" : "hidden"}
+              animate={categoriesInView ? "visible" : "hidden"}
             >
               {categories.map((item, index) => (
                 <motion.div
@@ -438,7 +462,7 @@ export default function Home() {
             </motion.div>
           </motion.div>
 
-          <Footer pos={pos} />
+          <Footer />
         </div>
       )}
     </>

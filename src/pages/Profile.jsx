@@ -1,57 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import NavBar from "../components/NavBar";
-import Footer from "../components/Footer";
-import { RiLockPasswordLine } from "react-icons/ri";
-import { MdOutlineMail } from "react-icons/md";
 import { FaRegUserCircle } from "react-icons/fa";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loginAction } from "../slice/auth.slice";
+import { MdOutlineMail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
 
-export default function Login() {
-  const [data, setData] = useState({
-    user: "",
-    email: "",
-    password: "",
-  });
-  const navigate = useNavigate();
-
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-
-  function login() {
-    setLoading(true);
-    axios
-      .post(
-        "https://dishcovery-api-idzo.onrender.com/api/v1/users/login",
-        data,
-        { withCredentials: true }
-      )
-      .then((res) => {
-        console.log(res.data);
-        dispatch(loginAction());
-        navigate("/")
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-    setLoading(false);
-  }
-
+export default function Profile() {
   return (
     <div>
       <NavBar />
+
       <div className="flex w-[80%] m-auto justify-evenly items-center my-16 Nunito outline outline-gray-300 rounded-xl shadow-xl p-8 relative">
         <div className="w-[40%]">
-          <img
-            src="./login.jpeg"
-            alt=""
-            className="w-full object-cover h-[65vh]"
-          />
+         <img src="./pizza.jpeg" alt=""   className="w-full object-cover h-[65vh]" />
+         <input type="file"   className="border border-1 bg-[#ffffff] border-[#B76156] text-[#B76156] text-sm rounded-md p-1 px-4 m-2 absolute top-[2%]"
+                  name="" id=""  />
         </div>
         <div className="flex flex-col w-[50%]   ">
-          <p className="text-3xl font-bold py-4">Want to join our Family</p>
+          <p className="text-3xl font-bold py-4">
+        
+        Profile Setting
+          </p>
           <span className=" flex flex-col ">
             <div className="relative">
               <FaRegUserCircle
@@ -62,15 +30,8 @@ export default function Login() {
                 type="text"
                 placeholder=" Enter your Username"
                 className="p-2 pl-10 w-full border-0 outline outline-1 outline-bottom-0 focus-within:outline-1 outline-gray-300 border-b-4 border-gray-300 focus-within:border-[#B76156] rounded-t-lg"
-                value={data.user}
-                disabled={loading}
-                onChange={(e) => {
-                  setData({
-                    user: e.target.value,
-                    email: data.email,
-                    password: data.password,
-                  });
-                }}
+                
+                
               />
             </div>
 
@@ -83,15 +44,6 @@ export default function Login() {
                 type="email"
                 placeholder="Enter your Email"
                 className="p-2  pl-10 w-full border-0 outline outline-1 outline-bottom-0 focus-within:outline-1 outline-gray-300 border-b-4 border-gray-300 focus-within:border-[#B76156]"
-                value={data.email}
-                disabled={loading}
-                onChange={(e) => {
-                  setData({
-                    user: data.user,
-                    email: e.target.value,
-                    password: data.password,
-                  });
-                }}
               />
             </div>
 
@@ -104,32 +56,27 @@ export default function Login() {
                 type="password"
                 placeholder="Enter your Password"
                 className="p-2 w-full pl-10 border-0 outline outline-1 outline-bottom-0 focus-within:outline-1 outline-gray-300 border-b-4 border-gray-300 focus-within:border-[#B76156] rounded-b-lg"
-                value={data.password}
-                disabled={loading}
-                onChange={(e) => {
-                  setData({
-                    user: data.user,
-                    password: e.target.value,
-                    email: data.email,
-                  });
-                }}
+              />
+            </div>
+            <div className="relative">
+              <RiLockPasswordLine
+                color="gray"
+                className="absolute left-3 top-1/2 -translate-y-1/2"
+              />
+              <input
+                type="password"
+                placeholder="Enter your Confirm Password"
+                className="p-2 w-full pl-10 border-0 outline outline-1 outline-bottom-0 focus-within:outline-1 outline-gray-300 border-b-4 border-gray-300 focus-within:border-[#B76156] rounded-b-lg"
               />
             </div>
           </span>
 
           <button
             className="px-6 py-2 rounded-md bg-[#b55d51] font-bold text-white m-4 "
-            onClick={login}
-            disabled={loading}
           >
-            {loading ? "Loading..." : "Login"}
+            Save
           </button>
-          <span>
-            Don't have an account?{" "}
-            <a href="/signup" className="text-[#b55d51] text-lg  underline ">
-              Sign Up
-            </a>
-          </span>
+         
           <ul className="flex justify-end items-center w-[30%] absolute bottom-[5%] right-[2%]">
             <li className="flex">
               <span className="Nunito text-2xl  font-black text-[#B76156] flex justify-center items-center ">
@@ -143,7 +90,6 @@ export default function Login() {
         </div>
       </div>
 
-      {/* footer */}
       <div className="block w-full bg-gray-200 m-auto">
         <div className="w-[80%] text-md flex justify-evenly items-center p-8 m-auto ">
           <div className="w-[30%] ">
